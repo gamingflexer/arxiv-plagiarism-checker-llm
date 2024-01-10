@@ -1,0 +1,4 @@
+gradio
+langchain
+langsmith
+python-decouple

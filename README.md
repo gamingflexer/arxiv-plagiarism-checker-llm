@@ -9,9 +9,11 @@ Arxiv author's plagiarism check just by entering the arxiv author
 
 ## Docs
 
+- Miro RoadMap [Link](https://miro.com/app/board/uXjVN8HgXk8=/)
+
 ### Research Points
 
-- 
+- Notion [Link](https://gamingflexer.notion.site/Arxiv-983d173f46c1426caa9dab319f4ddb3d?pvs=4)
 
 ----
 

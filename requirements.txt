@@ -6,3 +6,5 @@ arxiv
 pypdf2==3.0.1
 tiktoken
 langchain_openai
+google-search-results
+copyleaks

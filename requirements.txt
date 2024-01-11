@@ -2,3 +2,7 @@ gradio
 langchain
 langsmith
 python-decouple
+arxiv
+pypdf2==3.0.1
+tiktoken
+langchain_openai

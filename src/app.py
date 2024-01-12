@@ -1,6 +1,14 @@
 import gradio as gr
 import pandas as pd
 import logging
+from scrapper.main import ArxivPaper
+
+"""
+author_obj = ArxivPaper("Andrew Ng")
+paper_links = author_obj.get_results_google(number_of_results=25)
+paper_ids = author_obj.get_paper_id(paper_links)
+author_obj.get_paper_details_batch(paper_ids=paper_ids, path="./data/papers")
+"""
 
 def plagiarism_checker(authors_name):
     print(authors_name)

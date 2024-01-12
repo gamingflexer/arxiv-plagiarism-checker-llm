@@ -3,8 +3,20 @@ from langchain import PromptTemplate, LLMChain
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import tiktoken
 from typing import Union
-from config import OPENAI_API_KEY
+from config import OPENAI_API_KEY, SERP_API_KEY
 import os
+from serpapi import GoogleSearch
+
+def get_google_scrape(query, api_key = SERP_API_KEY, num = 25):
+    search = GoogleSearch({
+        "q": query,
+        "api_key": api_key,
+        "start": "1",
+        "end": "10",
+        "num": num,
+    })
+    result = search.get_dict()
+    return result
 
 def init_extractor(
     template: str,

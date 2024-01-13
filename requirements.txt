@@ -8,3 +8,8 @@ tiktoken
 langchain_openai
 google-search-results
 copyleaks
+playwright 
+beautifulsoup4
+crewai
+flask
+supabase

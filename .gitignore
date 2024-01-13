@@ -162,3 +162,4 @@ src/flagged/log.csv
 .vscode/PythonImportHelper-v2-Completion.json
 notebooks/*.pdf
 notebooks/notebooks/papers/*.jsonl
+src/data/papers/*.jsonl

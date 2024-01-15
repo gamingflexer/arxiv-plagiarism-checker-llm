@@ -18,20 +18,3 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: git push https://HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/asach/arxiv-plagiarism-checker-Ilm main
-
-name: Check file size
-on:               # or directly `on: [push]` to run the action on every push on any branch
-  pull_request:
-    branches: [main]
-
-  # to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-jobs:
-  sync-to-hub:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check large files
-        uses: ActionsDesk/lfs-warning@v2.0
-        with:
-          filesizelimit: 10485760 # this is 10MB so we can sync to HF Spaces

@@ -1,4 +1,19 @@
+---
+title: Arxiv Plagiarism Checker LLM
+emoji: 🚀
+colorFrom: pink
+colorTo: pink
+sdk: docker
+sdk_version : 3.0.6
+pinned: true
+---
+
 # Arxiv Plagiarism Checker LLM
+
+## end-end-mlops-huggingface
+
+[![Sync to Hugging Face hub](https://github.com/gamingflexer/arxiv-plagiarism-checker-llm/actions/workflows/main.yml/badge.svg)](https://github.com/gamingflexer/arxiv-plagiarism-checker-llm/actions/workflows/main.yml)
+
 
 Arxiv author's plagiarism check just by entering the arxiv author
 

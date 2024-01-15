@@ -29,6 +29,7 @@ iface = gr.Interface(
     outputs=gr.Dataframe(headers=["Paper Name", "Paper id", "Paper Link", "Report link"]),
     title="Arxiv author's plagiarism check just by entering the arxiv author",
     description="Arxiv Plagiarism Checker LLM - Enter Authors Name",
+    allow_flagging = False,
 )
 
 iface.launch()

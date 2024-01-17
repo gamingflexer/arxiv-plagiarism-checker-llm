@@ -1,3 +1,11 @@
+ARG OPENAI_API_KEY
+ARG COPY_LEAKS_API
+ARG SERP_API_KEY
+ARG SUPABASE_KEY
+ARG SUPABASE_URL
+ARG COPY_LEAKS_EMAIL_ADDRESS
+ARG COPY_LEAKS_EMAIL_KEY
+
 FROM python:3.9
 
 WORKDIR /code
@@ -14,7 +22,15 @@ USER user
 
 # Set home to the user's home directory
 ENV HOME=/home/user \
-    PATH=/home/user/.local/bin:$PATH
+    PATH=/home/user/.local/bin:$PATH \
+    OPENAI_API_KEY=$OPENAI_API_KEY \
+    COPY_LEAKS_API=$COPY_LEAKS_API \
+    SERP_API_KEY=$SERP_API_KEY \
+    SUPABASE_KEY=$SUPABASE_KEY \
+    SUPABASE_URL=$SUPABASE_URL \
+    COPY_LEAKS_EMAIL_ADDRESS=$COPY_LEAKS_EMAIL_ADDRESS \
+    COPY_LEAKS_EMAIL_KEY=$COPY_LEAKS_EMAIL_KEY
+
 
 # Set the working directory to the user's home directory
 WORKDIR $HOME/app

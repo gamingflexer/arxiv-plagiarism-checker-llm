@@ -51,9 +51,21 @@ def plagiarism_checker(authors_name: str,number_of_results=5, progress=gr.Progre
     return "Fetched Latest Papers"
 
 def fetch_papers_data_df(authors_name: str, progress=gr.Progress()):
-    return pd.DataFrame(fetch_papers_data(authors_name))
+    progress(0.2, desc="Fetching Papers")
+    fetched_data = fetch_papers_data(authors_name,all=True)
+    progress(0.8, desc="Making DataFrame")
+    return pd.DataFrame(fetched_data[1])
 
 with gr.Blocks() as demo:
+    
+    with gr.Tab("Get Papers Data"):
+        with gr.Row():
+            authors_name_paper = gr.Textbox(label="Enter Author's Name")
+            submit_button_tab_2 = gr.Button("Start")
+        with gr.Row():
+            dataframe_output = gr.Dataframe(headers=['doi_no', 'title', 'summary', 'authors', 'year', 'pdf_link',
+    'references', 'categories', 'comment', 'journal_ref', 'source',
+    'primary_category', 'published','author_name'])
         
     with gr.Tab("Arxiv Plagiarism Fetcher & Save to DB"):
         with gr.Row():
@@ -63,14 +75,6 @@ with gr.Blocks() as demo:
         with gr.Row():
             completed = gr.Textbox(label="Completed")
 
-    with gr.Tab("Get Papers Data"):
-        with gr.Row():
-            authors_name = gr.Textbox(label="Enter Author's Name")
-            submit_button_tab_2 = gr.Button("Start")
-        with gr.Row():
-            dataframe_output = gr.Dataframe(headers=['doi_no', 'title', 'summary', 'authors', 'year', 'pdf_link',
-    'references', 'categories', 'comment', 'journal_ref', 'source',
-    'primary_category', 'published'])
             
     with gr.Tab("Arxiv Plagiarism Checker"):
         with gr.Row():
@@ -80,6 +84,6 @@ with gr.Blocks() as demo:
 
 
     submit_button_tab_1.click(fn=plagiarism_checker,inputs=[authors_name, number_of_results] ,outputs= completed)
-    submit_button_tab_2.click(fn=fetch_papers_data_df,inputs=[authors_name] ,outputs=dataframe_output)
+    submit_button_tab_2.click(fn=fetch_papers_data_df,inputs=[authors_name_paper] ,outputs=dataframe_output)
 
 demo.launch()

@@ -51,8 +51,9 @@ def get_correct_author_name(user_input_author):
     
 
 def fetch_papers_data(author_name, fields_to_query = ["doi_no"],table_name: str = 'papers', all=False):
+    author_name = get_correct_author_name(author_name)
     if all:
-        data, count = supabase.table(table_name).select("*").execute()
+        data, count = supabase.table(table_name).select("*").eq('author_name', author_name).execute()
         return data
     data, count = supabase.table(table_name).select(",".join(fields_to_query)).eq('author_name', author_name).execute()
     return data[1]

@@ -3,6 +3,7 @@ from scrapper.arxiv import get_paper_id,Arxiv
 from scrapper.extractor import get_google_scrape,init_extractor
 from tqdm import tqdm
 import os
+from config import OPENAI_API_KEY
 
 class ArxivPaper:
 
@@ -33,6 +34,7 @@ class ArxivPaper:
     
     def get_paper_details_batch(self, paper_ids: list, path: str = "./data/papers"):
         path_author = os.path.join(path, self.author_name.replace(" ", "_"))
+        data = {}
         for i in tqdm(paper_ids):
             paper = Arxiv(i)
             paper.load()
@@ -42,3 +44,4 @@ class ArxivPaper:
             text_splitter=self.text_splitter,)
             paper.chunker()
             paper.save_chunks(include_metadata=True, path=path_author)
+        

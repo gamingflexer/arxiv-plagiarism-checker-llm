@@ -1,5 +1,6 @@
 from langchain_community.chat_models import ChatOpenAI
-from langchain import PromptTemplate, LLMChain
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import tiktoken
 from typing import Union

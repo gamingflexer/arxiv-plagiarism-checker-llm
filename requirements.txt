@@ -13,3 +13,5 @@ beautifulsoup4
 crewai
 flask
 supabase
+python-Levenshtein
+fuzzywuzzy

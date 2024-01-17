@@ -10,6 +10,7 @@ import PyPDF2
 import requests
 from tqdm.auto import tqdm
 from decouple import config
+import uuid
 
 """
 Usage : get_paper_id("8-bit matrix multiplication for transformers at scale") -> 2106.09680
@@ -91,7 +92,7 @@ class Arxiv:
         # initialize the requests session
         self.session = requests.Session()
     
-    def load(self, save: bool = False):
+    def load(self, path_author : str ,save: bool = False):
         """Load the paper from the ArXiv API or from a local file
         if it already exists. Stores the paper's text content and
         meta data in self.content and other attributes.
@@ -101,6 +102,7 @@ class Arxiv:
         :type save: bool, optional
         """
         # check if pdf already exists
+        # to_save_path = os.path.join(path_author, str(self.id)+".json")
         if os.path.exists(f'papers/{self.id}.json'):
             print(f'Loading papers/{self.id}.json from file')
             with open(f'papers/{self.id}.json', 'r') as fp:
@@ -108,15 +110,22 @@ class Arxiv:
             for key, value in attributes.items():
                 setattr(self, key, value)
         else:
-            res = self.session.get(self.url)
-            with open(f'temp.pdf', 'wb') as fp:
-                fp.write(res.content)
-            # extract text content
-            self._convert_pdf_to_text()
-            # get meta for PDF
-            self._download_meta()
-            if save:
-                self.save()
+            try:
+                res = self.session.get(self.url)
+                print(f'Downloading {self.url}')
+                # uuid_small = str(uuid.uuid4())[:8]
+                temp_pdf_path = f'./temp.pdf'
+                with open(temp_pdf_path, 'wb') as fp:
+                    fp.write(res.content)
+                # extract text content
+                self._convert_pdf_to_text()
+                # get meta for PDF
+                self._download_meta()
+                if save:
+                    self.save()
+            except Exception as e:
+                print(f"Error while downloading paper {self.id}: {e}")
+                raise e
 
     def get_refs(self, extractor, text_splitter):
         """Get the references for the paper.

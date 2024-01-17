@@ -11,8 +11,8 @@ class ArxivPaper:
         self.author_name = author_name
         self.extractor, self.text_splitter = init_extractor(template=reference_extraction['template'], openai_api_key=OPENAI_API_KEY)
     
-    def get_results_google(self, number_of_results: int = 25):
-        result_dict = get_google_scrape(self.author_name +" research papers arxiv.org",num=number_of_results)
+    def get_results_google(self, number_of_results = 25):
+        result_dict = get_google_scrape(str(self.author_name)+" research papers arxiv.org",num=number_of_results)
         paper_links = []
         for i in result_dict['organic_results']:
             if "arxiv.org" in i['link']:
@@ -36,12 +36,14 @@ class ArxivPaper:
         path_author = os.path.join(path, self.author_name.replace(" ", "_"))
         data = {}
         for i in tqdm(paper_ids):
-            paper = Arxiv(i)
-            paper.load()
-            paper.get_meta()
-            refs = paper.get_refs(
-            extractor=self.extractor,
-            text_splitter=self.text_splitter,)
-            paper.chunker()
-            paper.save_chunks(include_metadata=True, path=path_author)
-        
+            try:
+                paper = Arxiv(i)
+                paper.load(path_author)
+                paper.get_meta()
+                refs = paper.get_refs(
+                extractor=self.extractor,
+                text_splitter=self.text_splitter,)
+                paper.chunker()
+                paper.save_chunks(include_metadata=True, path=path_author)
+            except Exception as e:
+                print(f"Error processing paper {i}: {e}")

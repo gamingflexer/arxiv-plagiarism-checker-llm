@@ -163,3 +163,5 @@ src/flagged/log.csv
 notebooks/*.pdf
 notebooks/notebooks/papers/*.jsonl
 src/data/papers/*.jsonl
+src/data/papers/*
+src/notebooks/papers/*.jsonl

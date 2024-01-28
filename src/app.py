@@ -6,8 +6,6 @@ from config import *
 from db.db_functions import get_correct_author_name, insert_papers_data, fetch_papers_data, get_unquine_authors
 from utils import compare_paper_ids
 
-unique_authors_df = get_unquine_authors()
-
 def plagiarism_checker(authors_name_fetch,number_of_results_fetch, progress=gr.Progress()):
     number_of_results_fetch = int(number_of_results_fetch)
     print(authors_name_fetch,number_of_results_fetch,type(number_of_results_fetch))
@@ -69,7 +67,7 @@ with gr.Blocks() as demo:
     'references', 'categories', 'comment', 'journal_ref', 'source',
     'summary', 'published'])
         with gr.Row():
-            unquine_authors_output = gr.Dataframe(headers=["author_name"],value=unique_authors_df, label=" Authors Currently in our DB")
+            unquine_authors_output = gr.Dataframe(headers=["author_name"],value=get_unquine_authors(), label=" Authors Currently in our DB")
         
         
     with gr.Tab("Arxiv Plagiarism Fetcher & Save to DB"):

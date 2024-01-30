@@ -1,3 +1,21 @@
+- 2024_main_document_lvl
+- 2024_main_paragraph_lvl
+
+- 2023_main_document_lvl
+- 2023_main_paragraph_lvl
+
+- Embeddings convert pdfs
+  - Para
+  - Docs
+- HNSW - Kmeans fast searcddh
+- K means graphs based on the topics
+- Check for similarity between our own db
+  - Para
+  - Docs
+- Get The most important Ones
+- Get the Unquine sentances like title & other content ?? - LLM think karun karel
+- Search Google using the unquine searches --> get the top 3 and do the same check again --> result
+
 ### 1. Data Input:
 
 - **Input Data:** Collect a diverse dataset of academic papers, articles, or textual content from various sources.
@@ -78,3 +96,5 @@
 - **Large Language Models:**
   - Fine-tune or use pre-trained models for enhanced context understanding.
   - Hugging Face Transformers library for accessing pre-trained models.
+
+- Fingerprinting Concept

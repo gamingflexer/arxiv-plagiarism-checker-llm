@@ -1,19 +1,22 @@
-version: "3.8"
-services:
+version: '3.9'
 
-  chroma:
+networks:
+  net:
+    driver: bridge
+services:
+  server:
     image: ghcr.io/chroma-core/chroma:latest
+    environment:
+      - IS_PERSISTENT=TRUE
     volumes:
-      - ./embeddings:/chroma/.chroma/index
+      # Default configuration for persist_directory in chromadb/config.py
+      # Currently it's located in "/chroma/chroma/"
+      - chroma-data:/home/ubuntu/research/arxiv-plagiarism-checker-llm/embeddings
     ports:
       - 8000:8000
     networks:
       - net
 
 volumes:
-  backups:
+  chroma-data:
     driver: local
-
-networks:
-  net:
-    driver: bridge

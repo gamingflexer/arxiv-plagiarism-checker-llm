@@ -13,7 +13,7 @@ from config import OPENAI_API_KEY
 emmbedding_model = "text-embedding-3-large"
 openai_ef = embedding_functions.OpenAIEmbeddingFunction(model_name=emmbedding_model,api_key=OPENAI_API_KEY)
 if deploy:
-    chroma_client = chromadb.HttpClient(host='localhost', port=8000)
+    chroma_client = chromadb.PersistentClient(path="./data/emeddeings")
 else:
     chroma_client = chromadb.PersistentClient(path="/home/ubuntu/research/data/emeddeings")
     

@@ -16,3 +16,4 @@ supabase
 python-Levenshtein
 fuzzywuzzy
 nltk
+chromadb

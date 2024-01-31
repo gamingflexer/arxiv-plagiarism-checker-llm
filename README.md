@@ -10,9 +10,9 @@ pinned: true
 
 # Arxiv Plagiarism Checker LLM
 
-## Demo Link
+**Demo** - [Link](https://huggingface.co/spaces/asach/arxiv-plagiarism-checker-Ilm)
 
-![Demo Link](https://huggingface.co/spaces/asach/arxiv-plagiarism-checker-Ilm)
+**Dataset** - [Link](https://huggingface.co/datasets/asach/arxiv-2023-4-months-openai-embeddings)
 
 [![Sync to Hugging Face hub](https://github.com/gamingflexer/arxiv-plagiarism-checker-llm/actions/workflows/main.yml/badge.svg)](https://github.com/gamingflexer/arxiv-plagiarism-checker-llm/actions/workflows/main.yml)
 

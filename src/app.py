@@ -5,6 +5,19 @@ from scrapper.main import ArxivPaper
 from config import *
 from db.db_functions import get_correct_author_name, insert_papers_data, fetch_papers_data, get_unquine_authors
 from utils import compare_paper_ids
+import chromadb
+from chromadb.config import Settings
+from chromadb.utils import embedding_functions
+from config import OPENAI_API_KEY
+
+emmbedding_model = "text-embedding-3-large"
+openai_ef = embedding_functions.OpenAIEmbeddingFunction(model_name=emmbedding_model,api_key=OPENAI_API_KEY)
+if deploy:
+    chroma_client = chromadb.HttpClient(host='localhost', port=8000)
+else:
+    chroma_client = chromadb.PersistentClient(path="/home/ubuntu/research/data/emeddeings")
+    
+collection_doc = chroma_client.get_or_create_collection(name="2024_document_lvl_test")
 
 def plagiarism_checker(authors_name_fetch,number_of_results_fetch, progress=gr.Progress()):
     number_of_results_fetch = int(number_of_results_fetch)
@@ -56,6 +69,24 @@ def fetch_papers_data_df(authors_name: str, progress=gr.Progress()):
     progress(0.8, desc="Making DataFrame")
     return pd.DataFrame(fetched_data)
 
+def embedding_searcher(embbed_text_search, top_k=4, progress=gr.Progress()):
+    
+    data = collection_doc.query(query_embeddings = openai_ef([embbed_text_search]), n_results=top_k)
+    result = pd.DataFrame(data['ids'][0], columns=['ID'])
+    result['Distance'] = data['distances'][0]
+
+    # Extracting information from metadatas
+    metadata_list = data['metadatas'][0]
+    titles = [metadata['title'] for metadata in metadata_list]
+    authors = [metadata['authors'] for metadata in metadata_list]
+    sources = [metadata['source'] for metadata in metadata_list]
+
+    # Adding metadata columns to the dataframe
+    result['Title'] = titles
+    result['Authors'] = authors
+    result['Source'] = sources
+    return result
+
 with gr.Blocks() as demo:
     
     with gr.Tab("Get Papers Data"):
@@ -83,8 +114,18 @@ with gr.Blocks() as demo:
             authors_name = gr.Textbox(label="Enter Author's Name")
             number_of_results = gr.Number(label="Number of results - Min - 5")
             submit_button = gr.Button("Start")
+            
+    with gr.Tab("Open Embeddings Search"):
+        with gr.Row():
+            embbed_text_search = gr.Textbox(label="Enter Text")
+        with gr.Row():
+            top_k = gr.Number(label="Number of results - Min 2")
+        with gr.Row():
+            submit_button_tab_4 = gr.Button("Start")
+            dataframe_output_tab_4 = gr.Dataframe(headers=['ID', 'Distance', 'Title', 'Authors', 'Source'])
 
     submit_button_tab_1.click(fn=plagiarism_checker,inputs=[authors_name_fetch, number_of_results_fetch] ,outputs= completed)
     submit_button_tab_2.click(fn=fetch_papers_data_df,inputs=[authors_name_paper] ,outputs=dataframe_output)
+    submit_button_tab_4.click(fn=embedding_searcher,inputs=[embbed_text_search, top_k] ,outputs= dataframe_output_tab_4)
 
 demo.launch()

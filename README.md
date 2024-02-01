@@ -25,6 +25,23 @@ OUTPUT - Plagiarism Check Results
 
 You can get MIT authors List from here - [Link](https://dspace.mit.edu/handle/1721.1/7582/browse?rpp=100&sort_by=-1&type=author&offset=100&etal=-1&order=ASC)
 
+## Dataset & Embeddings
+
+We have used the arxiv dataset for the year 2023 & 2024 and then we have used the OpenAI Embeddings to generate the embeddings for the documents.
+
+- Install gsutil - [Link](https://cloud.google.com/storage/docs/gsutil_install)
+
+```bash
+
+# Single year files
+gsutil cp gs://arxiv-dataset/arxiv/arxiv/pdf/19*/ ./papers_from_2019/
+
+#single file
+gsutil cp gs://arxiv-dataset/arxiv/arxiv/pdf/2310/2310.00001v1.pdf .
+
+
+```
+
 ### Tech Stack
 
 - Gradio

@@ -34,16 +34,19 @@ class ArxivPaper:
     
     def get_paper_details_batch(self, paper_ids: list, path: str = "./data/papers"):
         path_author = os.path.join(path, self.author_name.replace(" ", "_"))
-        data = {}
+        data = []
         for i in tqdm(paper_ids):
             try:
                 paper = Arxiv(i)
                 paper.load(path_author)
-                paper.get_meta()
+                metadata = paper.get_meta()
                 refs = paper.get_refs(
                 extractor=self.extractor,
                 text_splitter=self.text_splitter,)
                 paper.chunker()
                 paper.save_chunks(include_metadata=True, path=path_author)
+                data.append(metadata)
             except Exception as e:
                 print(f"Error processing paper {i}: {e}")
+        return data
+                

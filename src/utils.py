@@ -1,8 +1,14 @@
 import json
 import uuid
+from langchain.text_splitter import CharacterTextSplitter
+
+text_splitter = CharacterTextSplitter(
+    separator="\n",
+    chunk_size=3000, chunk_overlap=0
+)
 
 def generate_uuid():
-    return str(uuid.uuid4().g
+    return str(uuid.uuid4())
 
 def check_id_extis_in_json(file_id):
     with open('file_ids.json', 'r') as f:

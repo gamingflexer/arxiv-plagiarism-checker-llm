@@ -39,3 +39,26 @@ References: {refs}
 
 Title: """
 }
+
+prompt_unquiness_para = """
+    You are Plagarism researcher, and we have a dataset of all arxiv papers in vector format.
+    Given title as {title} and summary as {summary}.
+    paragrphs are - {text}
+    
+    1. Understand the paper
+    2. As a Plagarism researcher your job is to find the paragrphs which are unique and are may not present in any other paper.
+    3. So we can use those paragrphs to find the unique papers.
+    
+    So help and return it in a format 'data':['para','para','para']. Only provide the response in a JSON FORMAT. no extra explanation is needed.
+    """
+    
+google_search_titles =  """
+    You are Plagarism researcher and you want to find the most relevant papers for your research.
+    GIven title as {title} and summary as {summary}.
+    
+    1. Understand the topics mentioned inside the paper
+    2. As a researcher your job is to find the most relevant papers from google search regarding the topics
+    3. After understanding the topics amd summary you can to think about the titles which can be searched on google to get the papers which have implmeneted or are the most similar things.
+    
+    So help me generate the titles to search on google and return it in a format 'data':['title1','title2','title3']. Only provide the response in a JSON FORMAT. no extra explanation is needed.
+    """

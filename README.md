@@ -23,6 +23,8 @@ Arxiv author's plagiarism check just by entering the arxiv author
 INPUT - Authors Name
 OUTPUT - Plagiarism Check Results
 
+You can get MIT authors List from here - [Link](https://dspace.mit.edu/handle/1721.1/7582/browse?rpp=100&sort_by=-1&type=author&offset=100&etal=-1&order=ASC)
+
 ### Tech Stack
 
 - Gradio

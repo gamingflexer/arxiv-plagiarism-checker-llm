@@ -165,3 +165,5 @@ notebooks/notebooks/papers/*.jsonl
 src/data/papers/*.jsonl
 src/data/papers/*
 src/notebooks/papers/*.jsonl
+src/*.pdf
+src/data_temp/*

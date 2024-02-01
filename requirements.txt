@@ -15,5 +15,6 @@ flask
 supabase
 python-Levenshtein
 fuzzywuzzy
+fitz
 nltk
 chromadb
